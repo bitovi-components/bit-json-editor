@@ -59,9 +59,13 @@ Component.extend({
         data: "any",
         jsonBackground: "string",
         get json(){
-            var serialized = canReflect.serialize(this.data);
+            if(this.data) {
+                var serialized = canReflect.serialize(this.data);
 
-            return JSON.stringify(serialized, null, " ");
+                return JSON.stringify(serialized, null, " ");
+            } else {
+                return "";
+            }
         },
         checkJSON: function(json) {
             try {
@@ -77,7 +81,9 @@ Component.extend({
             }
         },
         updateData: function(json){
-            canReflect.update(this.data, JSON.parse( json ) );
+            if(json) {
+                canReflect.update(this.data, JSON.parse( json ) );
+            }
         }
     }
 });
