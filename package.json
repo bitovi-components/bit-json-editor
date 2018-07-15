@@ -1,0 +1,20 @@
+{
+  "name": "bit-json-editor",
+  "version": "5.0.0",
+  "description": "",
+  "main": "bit-json-editor.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitovi-components/bit-json-editor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bitovi-components/bit-json-editor/issues"
+  },
+  "homepage": "https://github.com/bitovi-components/bit-json-editor#readme"
+}

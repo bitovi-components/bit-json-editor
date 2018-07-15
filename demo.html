@@ -1,0 +1,25 @@
+<style>
+ bit-json-editor { height: 200px; width: 600px;}
+</style>
+
+
+<my-app></my-app>
+
+
+
+<script type="module">
+    import "./bit-json-editor.mjs";
+    import {Component, DefineMap, Observation} from "//unpkg.com/can@5/core.mjs";
+
+    Component.extend({
+        tag: "my-app",
+        view: `
+            <bit-json-editor data:from="this" on:data="update(scope.viewModel.data)"/>
+        `,
+        ViewModel: DefineMap.extend({seal: false},{
+            connectedCallback() {
+                window.viewModel = this;
+            }
+        })
+    })
+</script>
