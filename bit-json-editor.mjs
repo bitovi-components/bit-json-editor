@@ -47,7 +47,7 @@ var selectRange = function(element , start, end) {
     return range;
 };
 
-Component.extend({
+export default Component.extend({
     tag: "bit-json-editor",
     view: `
         <pre class='error'>{{{jsonBackground}}}</pre>
