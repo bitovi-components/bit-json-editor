@@ -1,4 +1,4 @@
-import { Component, Reflect as canReflect } from "//unpkg.com/can@pre/core.mjs";
+import { StacheElement, Reflect as canReflect, viewModel as canViewModel } from "//unpkg.com/can@pre/core.mjs";
 
 var style = document.createElement("style");
 style.innerHTML = `
@@ -47,43 +47,43 @@ var selectRange = function(element , start, end) {
     return range;
 };
 
-export default Component.extend({
-    tag: "bit-json-editor",
-    view: `
+export default class BitJsonEditor extends StacheElement {
+    static view = `
         <pre class='error'>{{{jsonBackground}}}</pre>
         <textarea value:from="json"
             on:change="updateData(scope.element.value)"
             on:input="checkJSON(scope.element.value)"></textarea>
-    `,
-    ViewModel: {
-        data: "any",
-        jsonBackground: "string",
-        get json(){
-            if(this.data) {
-                var serialized = canReflect.serialize(this.data);
+    `;
+    static props = {
+        data: Object,
+        jsonBackground: String
+    };
+    get json(){
+        if(this.data) {
+            var serialized = canReflect.serialize(this.data);
 
-                return JSON.stringify(serialized, null, " ");
+            return JSON.stringify(serialized, null, " ");
+        } else {
+            return "";
+        }
+    }
+    checkJSON(json) {
+        try {
+            JSON.parse(json);
+            this.jsonBackground = "";
+        } catch(e) {
+            var pos = getPosition(e);
+            if(pos !== undefined) {
+                this.jsonBackground = json.slice(0, pos)+"<span>_</span>"+json.slice(pos+1);
             } else {
-                return "";
-            }
-        },
-        checkJSON: function(json) {
-            try {
-                JSON.parse(json);
-                this.jsonBackground = "";
-            } catch(e) {
-                var pos = getPosition(e);
-                if(pos !== undefined) {
-                    this.jsonBackground = json.slice(0, pos)+"<span>_</span>"+json.slice(pos+1);
-                } else {
-                    this.jsonBackground = json.slice(0, json.length - 1) + "<span>_</span>";
-                }
-            }
-        },
-        updateData: function(json){
-            if(json) {
-                canReflect.update(this.data, JSON.parse( json ) );
+                this.jsonBackground = json.slice(0, json.length - 1) + "<span>_</span>";
             }
         }
     }
-});
+    updateData(json){
+        if(json) {
+            canReflect.update(this.data, JSON.parse( json ) );
+        }
+    }
+};
+customElements.define("bit-json-editor", BitJsonEditor);
