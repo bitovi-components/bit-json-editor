@@ -1,6 +1,6 @@
 {
   "name": "bit-json-editor",
-  "version": "5.0.2",
+  "version": "6.0.0-pre",
   "description": "",
   "main": "bit-json-editor.mjs",
   "scripts": {
