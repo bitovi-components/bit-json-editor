@@ -1,4 +1,4 @@
-import { StacheElement, Reflect as canReflect, viewModel as canViewModel } from "//unpkg.com/can@pre/core.mjs";
+import { StacheElement, Reflect as canReflect } from "//unpkg.com/can@pre/core.mjs";
 
 var style = document.createElement("style");
 style.innerHTML = `
