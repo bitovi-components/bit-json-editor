@@ -17,11 +17,7 @@
 
 		<script type="module">
 			import "./bit-json-editor.mjs";
-			import {
-				route,
-				StacheElement,
-				ObservableObject
-			} from "//unpkg.com/can@pre/core.mjs";
+			import { route, StacheElement } from "//unpkg.com/can@pre/core.mjs";
 
 			class MyApp extends StacheElement {
 				static view = `
@@ -30,10 +26,8 @@
 				static props = {
 					data: {
 						get default() {
-							const observable = new ObservableObject();
-							route.data = observable;
 							route.start();
-							return observable;
+							return route.data;
 						}
 					}
 				};
